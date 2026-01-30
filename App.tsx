@@ -18,10 +18,16 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Bags from './src/Bag.tsx';
+import OrderADd from './src/OrderAdd.tsx';
+import { NavigationContainer } from '@react-navigation/native';
+import Account from './src/Account.tsx';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
+
 
   const openMaps = ()=>{
     const addrs:string = "Havelwelle 1, 14471 Potsdam"
@@ -31,25 +37,18 @@ function App() {
     Linking.openURL(url);
   }
 
+  const Tab = createBottomTabNavigator();
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <View style={{ flex: 1 }}>
-        <Text>sdfs</Text>
-        <MapView
-          style={styles.mapContainer}
-          initialRegion={{
-            latitude: 52.521992,
-            longitude: 13.413244,
-            latitudeDelta: 0.0992,
-            longitudeDelta: 0.0421,
-          }}
-          provider={PROVIDER_GOOGLE}
-        />
-        <Pressable onPress={openMaps}>
-          <Text style={{color:"blue"}}>Berlin, Germany</Text>
-        </Pressable>
-      </View>
+
+      <NavigationContainer>
+        <Tab.Navigator screenOptions={{headerShown:false}}>
+          <Tab.Screen name="Bag" component={Bags} />
+          <Tab.Screen name="Add Orders" component={OrderADd} />
+          <Tab.Screen name={"Account"} component={Account} />
+        </Tab.Navigator>
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 }
@@ -64,3 +63,8 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+
+
+
+
