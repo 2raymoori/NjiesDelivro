@@ -20,7 +20,6 @@ import {
 } from 'react-native-safe-area-context';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Bags from './src/Bag.tsx';
 import OrderADd from './src/OrderAdd.tsx';
 import { NavigationContainer } from '@react-navigation/native';
 import Account from './src/Account.tsx';
@@ -30,6 +29,7 @@ import Icon from '@react-native-vector-icons/fontawesome6';
 import { Feather } from '@react-native-vector-icons/feather';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import {color} from "ansi-fragments";
+import BagStackNavigator from "./src/StkNavigation/BagStackNavigator.tsx";
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -64,7 +64,7 @@ function App() {
               ),
             }}
             name="Bag"
-            component={Bags}
+            component={BagStackNavigator}
           />
           <Tab.Screen
             name="Add Orders"

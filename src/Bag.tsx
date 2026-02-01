@@ -24,6 +24,7 @@ import {
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import OrderCard from './Components/OrderCard.tsx';
 import { orderList } from './Utility/mockDB.ts';
+import BagStackNavigator from './StkNavigation/BagStackNavigator.tsx';
 
 function Bags() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -37,34 +38,8 @@ function Bags() {
   };
 
   return (
-    <SafeAreaView style={styles.mapContainer}>
+      <BagStackNavigator />
 
-      {/*
-          <MapView
-          style={styles.mapContainer}
-          initialRegion={{
-            latitude: 52.521992,
-            longitude: 13.413244,
-            latitudeDelta: 0.0992,
-            longitudeDelta: 0.0421,
-          }}
-          provider={PROVIDER_GOOGLE}
-        />
-           */}
-
-      <FlatList
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={item => item.order.orderId.toString()}
-        data={orderList}
-        renderItem={({ item }) => (
-          <OrderCard
-            address={item.order.customer.address}
-            name={item.order.customer.name}
-          />
-        )}
-      />
-    </SafeAreaView>
   );
 }
 
@@ -76,3 +51,21 @@ const styles = StyleSheet.create({
 });
 
 export default Bags;
+
+
+{
+  /*
+    <SafeAreaView style={styles.mapContainer}>
+          <MapView
+          style={styles.mapContainer}
+          initialRegion={{
+            latitude: 52.521992,
+            longitude: 13.413244,
+            latitudeDelta: 0.0992,
+            longitudeDelta: 0.0421,
+          }}
+          provider={PROVIDER_GOOGLE}
+        />
+        </SafeAreaView>
+           */
+}
