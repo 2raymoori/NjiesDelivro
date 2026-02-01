@@ -29,13 +29,10 @@ import { FontAwesome6 } from '@react-native-vector-icons/fontawesome6';
 import Icon from '@react-native-vector-icons/fontawesome6';
 import { Feather } from '@react-native-vector-icons/feather';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
-
-
+import {color} from "ansi-fragments";
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
-
-
   const openMaps = ()=>{
     const addrs:string = "Havelwelle 1, 14471 Potsdam"
     const address = encodeURIComponent(addrs)
@@ -43,18 +40,27 @@ function App() {
 
     Linking.openURL(url);
   }
-
   const Tab = createBottomTabNavigator();
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-
       <NavigationContainer>
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Navigator
+          screenOptions={{
+            headerShown: false,
+            tabBarActiveTintColor: '#E53935',
+            tabBarInactiveTintColor: '#9E9E9E',
+            tabBarLabelStyle: {
+              fontSize: 11,
+              fontFamily: 'serif',
+              fontWeight: '500',
+            },
+          }}
+        >
           <Tab.Screen
             options={{
+
               tabBarIcon: () => (
-                <Feather name="shopping-bag" size={24} color="black" />
+                <Feather name="shopping-bag" size={24} color="#E53935" />
               ),
             }}
             name="Bag"
@@ -65,11 +71,7 @@ function App() {
             component={OrderADd}
             options={{
               tabBarIcon: () => (
-                <MaterialIcons
-                  name="add-circle"
-                  size={28}
-                  color="#E53935"
-                />
+                <MaterialIcons name="add-circle" size={28} color="#E53935" />
               ),
             }}
           />
@@ -77,6 +79,7 @@ function App() {
             name={'Account'}
             component={Account}
             options={{
+
               tabBarIcon: () => (
                 <MaterialIcons
                   name="person-outline"

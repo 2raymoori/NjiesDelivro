@@ -7,6 +7,7 @@
 
 import { NewAppScreen } from '@react-native/new-app-screen';
 import {
+  FlatList,
   Linking,
   Pressable,
   StatusBar,
@@ -18,8 +19,11 @@ import {
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
+  SafeAreaView,
 } from 'react-native-safe-area-context';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import OrderCard from './Components/OrderCard.tsx';
+import { orderList } from './Utility/mockDB.ts';
 
 function Bags() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -33,11 +37,10 @@ function Bags() {
   };
 
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <View style={{ flex: 1 }}>
-        <Text>sdfs</Text>
-        <MapView
+    <SafeAreaView style={styles.mapContainer}>
+
+      {/*
+          <MapView
           style={styles.mapContainer}
           initialRegion={{
             latitude: 52.521992,
@@ -47,17 +50,28 @@ function Bags() {
           }}
           provider={PROVIDER_GOOGLE}
         />
-        <Pressable onPress={openMaps}>
-          <Text style={{ color: 'blue' }}>Berlin, Germany</Text>
-        </Pressable>
-      </View>
-    </SafeAreaProvider>
+           */}
+
+      <FlatList
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={item => item.order.orderId.toString()}
+        data={orderList}
+        renderItem={({ item }) => (
+          <OrderCard
+            address={item.order.customer.address}
+            name={item.order.customer.name}
+          />
+        )}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   mapContainer: {
     flex: 1,
+    backgroundColor: 'orange',
   },
 });
 
