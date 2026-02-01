@@ -33,13 +33,11 @@ function Bags() {
     const addrs: string = 'Havelwelle 1, 14471 Potsdam';
     const address = encodeURIComponent(addrs);
     const url = `https://www.google.com/maps/dir/?api=1&destination=${address}`;
-
     Linking.openURL(url);
   };
 
   return (
       <BagStackNavigator />
-
   );
 }
 

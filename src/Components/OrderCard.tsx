@@ -27,7 +27,7 @@ const OrderCard = ({address,name}:IOrderCardProps):ReactElement<IOrderCardProps>
           </View>
           <View style={styles.subRows}>
             <MaterialIcons name="person" size={28} color="#E53935" />
-            <Level1Heading text={'Marco Hildebrand'} />
+            <Level1Heading text={name} />
           </View>
         </View>
         <View style={styles.subItems}>
@@ -42,8 +42,6 @@ const styles = StyleSheet.create({
 
 
   cardContainer: {
-    borderWidth: 1,
-    borderColor: '#E53935',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

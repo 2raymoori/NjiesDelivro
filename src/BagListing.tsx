@@ -1,11 +1,27 @@
-import { Text, View } from 'react-native';
+import { FlatList, Pressable, Text, View } from 'react-native';
+import { orderList } from './Utility/mockDB.ts';
+import OrderCard from './Components/OrderCard.tsx';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const BagListing = () => {
+const BagListing = (props) => {
+  const onCardNavigate = (inputOrder)=>{
+      props.navigation.navigate('bagDetail',{orderDetail:inputOrder});
+  }
   return (
-    <View>
-      <Text>Lads</Text>
-    </View>
-  )
+    <SafeAreaView>
+      <FlatList
+        data={orderList}
+        renderItem={({ item }) => (
+          <Pressable onPress={()=>{onCardNavigate(item.order);}}>
+            <OrderCard
+              name={item.order.customer.name}
+              address={item.order.customer.address}
+            />
+          </Pressable>
+        )}
+      />
+    </SafeAreaView>
+  );
 }
 
 export default BagListing
